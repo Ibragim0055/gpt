@@ -8,6 +8,29 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import PhotoSize, Message, CallbackQuery, KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
 import time
 
+import urllib3
+
+proxy_list = [
+    {'host': '123.45.67.89', 'port': '8000'},
+    {'host': '210.120.36.45', 'port': '9000'},
+    {'host': '45.67.89.12', 'port': '7000'}
+]
+
+for proxy in proxy_list:
+    proxy_url = f'http://{proxy["host"]}:{proxy["port"]}'
+    http = urllib3.ProxyManager(proxy_url)
+    print(f"Using proxy: {proxy['host']}:{proxy['port']}")
+
+    # Тут ты можешь добавить свой код для выполнения через каждый прокси из списка
+    r = http.request('GET', 'http://httpbin.org/ip')
+    print(r.data)
+
+
+
+
+
+
+
 openai.api_key = "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"
 
 conversation = []
