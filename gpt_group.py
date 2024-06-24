@@ -10,23 +10,31 @@ import time
 
 import urllib3
 
+import aiohttp
+from aiohttp_socks import ProxyType, ProxyConnector, ChainProxyConnector
+
 proxy_list = [
-    {'host': '123.45.67.89', 'port': '8000'},
-    {'host': '210.120.36.45', 'port': '9000'},
-    {'host': '45.67.89.12', 'port': '7000'}
+    {'host': '123.45.67.89', 'port': 8000},
+    {'host': '210.120.36.45', 'port': 9000},
+    {'host': '45.67.89.12', 'port': 7000}
 ]
 
-for proxy in proxy_list:
-    proxy_url = f'http://{proxy["host"]}:{proxy["port"]}'
-    http = urllib3.ProxyManager(proxy_url)
-    print(f"Using proxy: {proxy['host']}:{proxy['port']}")
+async def fetch_data_with_proxy(url, connector):
+    async with aiohttp.ClientSession(connector=connector) as session:
+        async with session.get(url) as response:
+            return await response.text()
 
-    # Тут ты можешь добавить свой код для выполнения через каждый прокси из списка
-    r = http.request('GET', 'http://httpbin.org/ip')
-    print(r.data)
+async def main1():
+    url = 'https://api.example.com/data'
+    for proxy in proxy_list:
+        proxy_url = f'http://{proxy["host"]}:{proxy["port"]}'
+        connector = ProxyConnector.from_url(proxy_url, proxy_headers=True)
+        print(f"Using proxy: {proxy['host']}:{proxy['port']}")
+        data = await fetch_data_with_proxy(url, connector)
+        print(data)
 
-
-
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main1())
 
 
 
