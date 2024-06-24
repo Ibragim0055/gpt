@@ -8,8 +8,8 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import PhotoSize, Message, CallbackQuery, KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
 import time
 
-openai.api_key = "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"
-
+openai.api_key = "sk-iDMYQdBYsBxMOeioc5pvrcoypejCg"
+#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
 conversation = []
 
 # Инициализация бота
