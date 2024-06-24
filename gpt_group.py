@@ -24,14 +24,20 @@ async def fetch_data_with_proxy(url, connector):
         async with session.get(url) as response:
             return await response.text()
 
+
 async def main1():
     url = 'https://api.example.com/data'
     for proxy in proxy_list:
         proxy_url = f'http://{proxy["host"]}:{proxy["port"]}'
-        connector = ProxyConnector.from_url(proxy_url)
+        connector = ProxyConnector(
+            proxy_type=ProxyType.HTTP,
+            host=proxy["host"],
+            port=proxy["port"]
+        )
         print(f"Using proxy: {proxy['host']}:{proxy['port']}")
         data = await fetch_data_with_proxy(url, connector)
         print(data)
+
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main1())
