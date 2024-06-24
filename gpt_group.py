@@ -28,7 +28,7 @@ async def main1():
     url = 'https://api.example.com/data'
     for proxy in proxy_list:
         proxy_url = f'http://{proxy["host"]}:{proxy["port"]}'
-        connector = ProxyConnector.from_url(proxy_url, proxy_headers=True)
+        connector = ProxyConnector.from_url(proxy_url)
         print(f"Using proxy: {proxy['host']}:{proxy['port']}")
         data = await fetch_data_with_proxy(url, connector)
         print(data)
