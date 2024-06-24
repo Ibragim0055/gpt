@@ -39,8 +39,6 @@ async def main1():
         print(data)
 
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(main1())
 
 
 
@@ -283,6 +281,8 @@ async def send_to_groups(message: Message):
                 print(i)
                 await bot.send_message(chat.chat.id, msg)
 
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main1())
 
 
 async def main():
