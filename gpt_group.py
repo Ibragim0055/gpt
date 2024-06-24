@@ -8,41 +8,6 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import PhotoSize, Message, CallbackQuery, KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
 import time
 
-import urllib3
-
-import aiohttp
-from aiohttp_socks import ProxyType, ProxyConnector, ChainProxyConnector
-
-proxy_list = [
-    {'host': '123.45.67.89', 'port': 8000},
-    {'host': '210.120.36.45', 'port': 9000},
-    {'host': '45.67.89.12', 'port': 7000}
-]
-
-async def fetch_data_with_proxy(url, connector):
-    async with aiohttp.ClientSession(connector=connector) as session:
-        async with session.get(url) as response:
-            return await response.text()
-
-
-async def main1():
-    url = 'https://api.example.com/data'
-    for proxy in proxy_list:
-        proxy_url = f'http://{proxy["host"]}:{proxy["port"]}'
-        connector = ProxyConnector(
-            proxy_type=ProxyType.HTTP,
-            host=proxy["host"],
-            port=proxy["port"]
-        )
-        print(f"Using proxy: {proxy['host']}:{proxy['port']}")
-        data = await fetch_data_with_proxy(url, connector)
-        print(data)
-
-
-
-
-
-
 openai.api_key = "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"
 
 conversation = []
@@ -280,9 +245,6 @@ async def send_to_groups(message: Message):
                 i+=1
                 print(i)
                 await bot.send_message(chat.chat.id, msg)
-
-loop = asyncio.get_event_loop()
-loop.run_until_complete(main1())
 
 
 async def main():
