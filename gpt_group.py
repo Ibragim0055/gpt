@@ -8,12 +8,12 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import PhotoSize, Message, CallbackQuery, KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
 import time
 
-openai.api_key = "sk-iDMYQdBYsBxMOeioc5pvrcoypejCg"
+openai.api_key = "sk-"
 #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
 conversation = []
 
 # Инициализация бота
-bot = Bot(token='6890822241:AAFK1bX5imtZAdVrrvTaGPBk47MfDoFa8DQ')
+bot = Bot(token='6890822241:')
 dp = Dispatcher(storage=MemoryStorage())
 
 class rass(StatesGroup):
